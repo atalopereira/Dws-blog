@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--neutral-extra-light);
+}
+
+.wrapper-logo {
+  display: flex;
+  align-items: end;
+  gap: 0.5rem;
+
+  span {
+    height: fit-content;
+    margin-bottom: 8px;
+    white-space: nowrap;
+  }
+}
