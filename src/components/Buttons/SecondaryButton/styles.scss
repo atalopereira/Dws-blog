@@ -1,0 +1,22 @@
+@use '../../../styles/typography.scss' as *;
+
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-body-large;
+  font-weight: $font-weight-semibold;
+  color: var(--secondary-medium);
+  border: 1px solid var(--secondary-medium);
+  border-radius: 42px;
+  padding: 12px;
+
+  &:hover {
+    color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+
+    .secondary-btn-arrow-left {
+      stroke: var(--secondary-dark)
+    }
+  }
+}
