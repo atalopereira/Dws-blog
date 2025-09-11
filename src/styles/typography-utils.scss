@@ -1,0 +1,18 @@
+@use "./mixins" as *;
+@use "./typography" as *;
+
+.body-large {
+  @include body($font-body-large, $font-weight-regular);
+}
+
+.body-large-semibold {
+  @include body($font-body-large, $font-weight-semibold);
+}
+
+.body-small {
+  @include body($font-body-small);
+}
+
+.caption {
+  @include body($font-caption, $font-weight-regular, $line-height-tight);
+}

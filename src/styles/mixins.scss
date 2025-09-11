@@ -1,0 +1,13 @@
+@use "./typography" as *;
+
+@mixin heading($size, $weight: $font-weight-bold, $line-height: $line-height-tight) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+}
+
+@mixin body($size, $weight: $font-weight-regular, $line-height: $line-height-relaxed) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+}
