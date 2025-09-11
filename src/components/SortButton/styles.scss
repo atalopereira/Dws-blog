@@ -1,0 +1,29 @@
+.sort-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  color: var(--neutral-extra-dark);
+  border-radius: 42px;
+  font-size: 16px;
+  font-family: 'open sans';
+
+  &:hover {
+    background-color: var(--accent1-medium);
+
+    span {
+      color: var(--neutral-extra-light)
+    }
+
+    .sort-icon {
+      stroke: var(--neutral-extra-light);
+    }
+  }
+}
+
+.sort-icon {
+  stroke: var(--accent1-medium);
+  width: 24px;
+  height: 24px;
+}
