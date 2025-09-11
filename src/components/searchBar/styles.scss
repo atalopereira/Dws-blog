@@ -1,10 +1,12 @@
 .search-bar {
+  width: 700px;
   position: relative;
 
   input {
     width: 100%;
+    height: 50px;
     border: 1px solid var(--neutral-extra-light);
-    padding: 8px 46px 8px 16px;
+    padding: 8px 50px 8px 16px;
     border-radius: 32px;
     color: var(--neutral-extra-dark);
     outline: none;
@@ -21,16 +23,20 @@
     transform: translateY(-50%);
     display: flex;
     background-color: var(--primary-light);
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (max-width: 430px) {
+    display: none;
   }
 }
 
 .search-icon {
   stroke: var(--neutral-lightest);
-  height: 10px;
-  width: 10px;
+  height: 24px;
+  width: 24px;
 }

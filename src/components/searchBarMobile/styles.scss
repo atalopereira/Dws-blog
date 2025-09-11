@@ -1,0 +1,59 @@
+.search-bar-mobile {
+  position: relative;
+  width: 100%;
+
+  input {
+    width: 100%;
+    border: 1px solid var(--neutral-extra-light);
+    padding: 8px 32px;
+    border-radius: 32px;
+    color: var(--neutral-extra-dark);
+    outline: none;
+
+    &:hover, &:focus {
+      border-color: var(--accent1-medium);
+    }
+  }
+
+  @media (min-width: 431px) {
+    display: none;
+  }
+}
+
+@mixin circle-button($side: right, $offset: 8px, $bg-color: transparent) {
+  position: absolute;
+  #{$side}: $offset;
+  top: 51%;
+  transform: translateY(-50%);
+  display: flex;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg-color;
+}
+
+.search-button {
+  @include circle-button(right, 8px, var(--primary-light));
+}
+
+.close-button {
+  @include circle-button(right, 8px, transparent);
+}
+
+.arrow-button {
+  @include circle-button(left, 8px, transparent);
+}
+
+.search-icon-mobile  {
+  stroke: var(--neutral-lightest);
+  height: 15px;
+  width: 15px;
+}
+
+.x-icon  {
+  stroke: var(--neutral-dark);
+  height: 15px;
+  width: 15px;
+}
