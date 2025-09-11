@@ -1,0 +1,24 @@
+@use '../../styles/typography.scss' as *;
+
+.filter-item {
+  width: 80%;
+  font-size: $font-body-small;
+  font-weight: $font-weight-regular;
+  color: var(--neutral-darkest);
+  background-color: transparent;
+  border-bottom: 1px solid var(--neutral-extra-light);
+  padding: 12px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--accent1-dark);
+    border-bottom: 1px solid var(--neutral-extra-light);
+  }
+
+  &.selected {
+    border: 1px solid var(--accent1-dark);
+    background-color: rgba(0,191,193, 0.05);
+    color: var(--accent1-dark);
+    border-radius: 4px;
+  }
+}
