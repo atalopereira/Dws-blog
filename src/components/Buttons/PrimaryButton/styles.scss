@@ -1,0 +1,19 @@
+@use '../../../styles/typography.scss' as *;
+
+.primary-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-body-large;
+  font-weight: $font-weight-semibold;
+  background-color: var(--secondary-medium);
+  color: var(--neutral-lightest);
+  border-radius: 42px;
+  padding: 12px;
+
+  &:hover {
+    background-color: var(--secondary-dark);
+    color: var(--neutral-lightest);
+  }
+}
