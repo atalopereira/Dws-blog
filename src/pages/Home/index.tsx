@@ -5,18 +5,25 @@ import { Card } from '../../components/Card';
 import { Dropdown } from '../../components/Dropdown';
 import { FilterList } from '../../components/FilterList';
 import { fetchPosts, selectPosts } from '../../store/postsSlice';
+import { fetchAuthors, selectAuthors } from '../../store/authorsSlice';
+import { fetchCategories, selectCategories } from '../../store/categoriesSlice';
 import type { AppDispatch } from '../../store/store';
 
 import './styles.scss';
 
-const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
-
 export function Home() {
   const dispatch = useDispatch<AppDispatch>();
   const posts = useSelector(selectPosts);
+  const authors = useSelector(selectAuthors);
+  const categories = useSelector(selectCategories);
+
+  const authorOptions = authors.map(author => ({ id: author.id, name: author.name }));
+  const categoryOptions = categories.map(category => ({ id: category.id, name: category.name }));
 
   useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchAuthors());
+    dispatch(fetchCategories());
   }, [dispatch])
 
   console.log(posts);
@@ -26,8 +33,8 @@ export function Home() {
       <div className='blog-home__filters'>
         <h1 className='blog-home__title'>DWS blog</h1>
         <div className='blog-home__dropdowns'>
-          <Dropdown title='Category' options={options} />
-          <Dropdown title='Author' options={options} />
+          <Dropdown title='Category' options={categoryOptions} />
+          <Dropdown title='Author' options={authorOptions} />
         </div>
         <div className='blog-home__sort-by'>
           <span className='blog-home__sort-by-label'>Sort by:</span>
@@ -37,7 +44,7 @@ export function Home() {
 
       <div className='blog-home__content'>
         <div className='blog-home__wrapper-filter-list'>
-          <FilterList />
+          <FilterList authors={authors} categories={categories} />
         </div>
         <div className='blog-home__cards'>
           {posts.map(post => (

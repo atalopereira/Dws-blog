@@ -3,9 +3,14 @@ import { ChevronDown } from "react-feather";
 
 import './styles.scss';
 
+interface DropdownOption {
+  id: string;
+  name: string;
+}
+
 interface DropdownProps {
-  options: string[];
   title: string;
+  options: DropdownOption[];
 }
 
 export function Dropdown({ options, title }: DropdownProps) {
@@ -43,8 +48,8 @@ export function Dropdown({ options, title }: DropdownProps) {
             {title}
           </li>
           {options.map((option) => (
-            <li key={option} onClick={() => handleSelect(option)}>
-              {option}
+            <li key={option.id} onClick={() => handleSelect(option.name)}>
+              {option.name}
             </li>
           ))}
         </ul>

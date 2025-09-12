@@ -1,10 +1,16 @@
 import { SlidersHorizontal } from "lucide-react";
 import { FilterItem } from "../FilterItem";
 import { PrimaryButton } from "../Buttons/PrimaryButton";
+import type { Author, Category } from "../../types";
 
 import './styles.scss';
 
-export function FilterList() {
+interface FilterListProps {
+  authors: Author[]
+  categories: Category[];
+}
+
+export function FilterList({ authors, categories }: FilterListProps) {
   return (
     <div className="filter-list">
       <div className="filter-list__header">
@@ -15,20 +21,18 @@ export function FilterList() {
       <div className="filter-list__items-section">
         <h3>Category</h3>
         <div className="filter-list__items">
-          <FilterItem content="Category 1" />
-          <FilterItem content="Category 2" />
-          <FilterItem content="Category 3" />
-          <FilterItem content="Category 4" />
+          {categories.map(category => (
+            <FilterItem key={category.id} content={category.name} />
+          ))}
         </div>
       </div>
 
       <div className="filter-list__items-section">
         <h3>Author</h3>
         <div className="filter-list__items">
-          <FilterItem content="Author Lastname" />
-          <FilterItem content="Author Lastname" />
-          <FilterItem content="Author Lastname" />
-          <FilterItem content="Author Lastname" />
+          {authors.map(author => (
+            <FilterItem key={author.id} content={author.name} />
+          ))}
         </div>
       </div>
 
