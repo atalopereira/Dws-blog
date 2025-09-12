@@ -1,25 +1,36 @@
+import type { Post } from '../../types';
 import { Tag } from '../Tag';
+import { useFormattedDate } from '../../hooks/useFormattedDate';
+
 import './styles.scss';
 
-export function Card() {
+interface CardProps {
+  post: Post;
+}
+
+export function Card({ post }: CardProps) {
+  const { author, title, content, categories, createdAt, thumbnail_url } = post;
+  const formattedDate = useFormattedDate(createdAt);
+
   return (
     <div className="article-card">
-      <img src="/src/assets/img-card.jpg" alt="Article image" />
+      <img src={thumbnail_url} alt="Article image" />
       <div className='content-card'>
         <div className='info-article'>
-          <span>Jan 20, 2024</span>
+          <span>{formattedDate}</span>
           <div className="divider"/>
-          <span>Author Lastname</span>
+          <span>{author.name}</span>
         </div>
 
         <div className='title-subtitle'>
-          <h3>This is the title of the article with two lines</h3>
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum est nisi, semper in gravida sed, egestas in nibh. Donec ultricies pellentesque mauris. </span>
+          <h3>{title}</h3>
+          <span>{content}</span>
         </div>
 
         <div className='container-tags'>
-          <Tag tagTitle="Category 1" />
-          <Tag tagTitle="Category 2" />
+          {categories.map(category => (
+            <Tag key={category.id} tagTitle={category.name} />
+          ))}
         </div>
       </div>
     </div>
