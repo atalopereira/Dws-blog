@@ -1,0 +1,11 @@
+@use '../../styles/typography.scss' as *;
+
+.container-tag {
+  width: 84px;
+  height: 32px;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 42px;
+  font-size: $font-caption;
+  background-color: var(--neutral-extra-light);
+}

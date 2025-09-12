@@ -5,6 +5,7 @@ import { SortButton } from './components/Buttons/SortButton';
 import { PrimaryButton } from './components/Buttons/PrimaryButton';
 import { SecondaryButton } from './components/Buttons/SecondaryButton';
 import { FilterItem } from './components/FilterItem';
+import { Card } from './components/Card';
 
 function App() {
 const options = ["Opção 1", "Opção 2", "Opção 3", "Opção 4", "Opção 5", "Opção 6"];
@@ -17,6 +18,7 @@ const options = ["Opção 1", "Opção 2", "Opção 3", "Opção 4", "Opção 5"
       <PrimaryButton>Apply filters</PrimaryButton>
       <SecondaryButton>Back</SecondaryButton>
       <FilterItem>Category 1</FilterItem>
+      <Card />
     </>
   )
 }

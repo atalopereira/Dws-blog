@@ -1,0 +1,62 @@
+@use '../../styles/typography.scss' as *;
+
+.article-card {
+  width: 314px;
+  height: 425px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 314px;
+    height: 196px;
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+.content-card {
+  display: flex;
+  flex-direction: column;
+  width: 314px;
+  height: 229px;
+  padding: 16px;
+  gap: 16px
+}
+
+.info-article {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: $font-caption;
+  color: var(--neutral-extra-dark);
+
+  div {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--secondary-dark);
+  }
+}
+
+.title-subtitle {
+  display: flex;
+  flex-direction: column;
+  width: 282px;
+  height: 114px;
+  gap: 8px;
+
+  span {
+    font-size: $font-body-small;
+    font-weight: $font-weight-regular;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.container-tags {
+  display: flex;
+  gap: 12px
+}
