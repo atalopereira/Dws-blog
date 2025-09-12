@@ -1,12 +1,12 @@
-import { useState, type ReactNode } from 'react';
+import { useState } from 'react';
 
 import './styles.scss';
 
 interface FilterItemProps {
-  children: ReactNode;
+  content: string;
 }
 
-export function FilterItem({ children }: FilterItemProps) {
+export function FilterItem({ content }: FilterItemProps) {
   const [isSelected, setIsSelected] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ export function FilterItem({ children }: FilterItemProps) {
       className={`filter-item ${isSelected ? 'selected' : ''}`}
       onClick={() => setIsSelected(!isSelected)}
     >
-      {children}
+      {content}
     </button>
   )
 }

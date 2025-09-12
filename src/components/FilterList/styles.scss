@@ -1,0 +1,33 @@
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 314px;
+  height: fit-content;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border: 1px solid var(--neutral-extra-light);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__icon {
+    stroke: var(--neutral-dark);
+  }
+
+  &__items-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

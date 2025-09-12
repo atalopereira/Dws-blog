@@ -5,6 +5,10 @@
   gap: 1rem;
   border: 1px solid var(--neutral-extra-light);
   padding: 16px;
+
+  @media (min-width: 765px) {
+    padding: 16px 56px;
+  }
 }
 
 .wrapper-logo {

@@ -1,7 +1,6 @@
 @use '../../styles/typography.scss' as *;
 
 .filter-item {
-  width: 80%;
   font-size: $font-body-small;
   font-weight: $font-weight-regular;
   color: var(--neutral-darkest);
@@ -9,6 +8,7 @@
   border-bottom: 1px solid var(--neutral-extra-light);
   padding: 12px;
   cursor: pointer;
+  text-align: start;
 
   &:hover {
     color: var(--accent1-dark);
