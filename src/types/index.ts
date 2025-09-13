@@ -3,7 +3,7 @@ export interface Post {
   title: string;
   content: string;
   thumbnail_url: string;
-  authorId: number;
+  authorId: string;
   createdAt: string;
   updatedAt: string;
   categories: Category[];
@@ -24,4 +24,9 @@ export interface Author {
   profilePicture: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface DropdownItem {
+  id: string;
+  name: string;
 }

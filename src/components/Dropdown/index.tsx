@@ -1,21 +1,18 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, X } from "lucide-react";
+import type { DropdownItem } from "../../types";
 
 import './styles.scss';
 
-interface DropdownOption {
-  id: string;
-  name: string;
-}
-
 interface DropdownProps {
   title: string;
-  options: DropdownOption[];
+  options: DropdownItem[];
+  selectedOptions: DropdownItem[];
+  onChange: (selected: DropdownItem[]) => void;
 }
 
-export function Dropdown({ options, title }: DropdownProps) {
+export function Dropdown({ options, title, selectedOptions, onChange }: DropdownProps) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<string[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,27 +28,30 @@ export function Dropdown({ options, title }: DropdownProps) {
   const toggleDropdown = () => setOpen(!open);
 
   function clearSelection() {
-    setSelected([]);
+    onChange([]);
   }
 
-  function handleSelect(option: string) {
-    if (selected.includes(option)) {
-      const selectedWithoutOption = selected.filter((item) => item !== option);
-      setSelected(selectedWithoutOption);
+  function handleSelect(option: DropdownItem) {
+    const alreadySelected = selectedOptions.some(item => item.id === option.id);
+    if (alreadySelected) {
+      const selectedWithoutOption = selectedOptions.filter((item) => item.id !== option.id);
+      onChange(selectedWithoutOption);
       return;
     }
 
-    const newSelected = [...selected, option];
-    setSelected(newSelected);
+    const newSelectedOptions = [...selectedOptions, option];
+    onChange(newSelectedOptions);
     setOpen(false);
   };
 
   return (
     <div className="dropdown" ref={dropdownRef}>
       <div className="dropdown-select" onClick={toggleDropdown}>
-        {selected.length > 0 ? (
+        {selectedOptions.length > 0 ? (
           <>
-            <span className="dropdown__text">{selected.join(", ")}</span>
+            <span className="dropdown__text">
+              {selectedOptions.map(item => item.name).join(", ")}
+            </span>
             <X className="dropdown__clear-icon" onClick={clearSelection} />
           </>
          ) : 
@@ -67,8 +67,8 @@ export function Dropdown({ options, title }: DropdownProps) {
           {options.map((option) => (
             <li
               key={option.id}
-              onClick={() => handleSelect(option.name)}
-              className={selected.includes(option.name) ? "dropdown__items-selected" : ""}>
+              onClick={() => handleSelect(option)}
+              className={selectedOptions.some((item) => item.id === option.id) ? "dropdown__items-selected" : ""}>
               {option.name}
             </li>
           ))}

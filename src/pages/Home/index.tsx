@@ -7,7 +7,10 @@ import { FilterList } from '../../components/FilterList';
 import { fetchPosts, selectPosts } from '../../store/postsSlice';
 import { fetchAuthors, selectAuthors } from '../../store/authorsSlice';
 import { fetchCategories, selectCategories } from '../../store/categoriesSlice';
+import type { DropdownItem } from '../../types';
 import type { AppDispatch } from '../../store/store';
+import { selectFilters, setAuthorsFilter, setCategoriesFilter } from '../../store/filtersSlice';
+import { useFilteredPosts } from '../../hooks/useFilteredPosts';
 
 import './styles.scss';
 
@@ -16,15 +19,26 @@ export function Home() {
   const posts = useSelector(selectPosts);
   const authors = useSelector(selectAuthors);
   const categories = useSelector(selectCategories);
+  const filters = useSelector(selectFilters);
 
   const authorOptions = authors.map(author => ({ id: author.id, name: author.name }));
   const categoryOptions = categories.map(category => ({ id: category.id, name: category.name }));
+
+  const filteredPosts = useFilteredPosts(posts, filters);
 
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchAuthors());
     dispatch(fetchCategories());
   }, [dispatch])
+
+  function handleCategory(selectedCategories: DropdownItem[]) {
+    dispatch(setCategoriesFilter(selectedCategories));
+  }
+
+  function handleAuthor(selectedAuthors: DropdownItem[]) {
+    dispatch(setAuthorsFilter(selectedAuthors));
+  }
 
   console.log(posts);
 
@@ -33,8 +47,18 @@ export function Home() {
       <div className='blog-home__filters'>
         <h1 className='blog-home__title'>DWS blog</h1>
         <div className='blog-home__dropdowns'>
-          <Dropdown title='Category' options={categoryOptions} />
-          <Dropdown title='Author' options={authorOptions} />
+          <Dropdown
+            title='Category'
+            options={categoryOptions}
+            selectedOptions={filters.categories}
+            onChange={handleCategory}
+          />
+          <Dropdown
+            title='Author'
+            options={authorOptions}
+            selectedOptions={filters.authors}
+            onChange={handleAuthor}
+          />
         </div>
         <div className='blog-home__sort-by'>
           <span className='blog-home__sort-by-label'>Sort by:</span>
@@ -47,7 +71,7 @@ export function Home() {
           <FilterList authors={authors} categories={categories} />
         </div>
         <div className='blog-home__cards'>
-          {posts.map(post => (
+          {filteredPosts.map(post => (
             <Card key={post.id} post={post} />
           ))}
         </div>
