@@ -24,6 +24,18 @@
     }
   }
 
+  &__text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 54px;
+  }
+
+  &__clear-icon {
+    width: 24px;
+    height: 24px;
+  }
+
   .dropdown-menu {
     background-color: var(--neutral-lightest);
     display: flex;
@@ -48,5 +60,9 @@
       height: 28px;
       cursor: pointer;
     }
+  }
+
+  &__items-selected {
+    color:var(--secondary-medium);
   }
 }

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown } from "react-feather";
+import { ChevronDown, X } from "lucide-react";
 
 import './styles.scss';
 
@@ -15,7 +15,7 @@ interface DropdownProps {
 
 export function Dropdown({ options, title }: DropdownProps) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(title);
+  const [selected, setSelected] = useState<string[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,25 +30,45 @@ export function Dropdown({ options, title }: DropdownProps) {
 
   const toggleDropdown = () => setOpen(!open);
 
-  const handleSelect = (option: string) => {
-    setSelected(option);
+  function clearSelection() {
+    setSelected([]);
+  }
+
+  function handleSelect(option: string) {
+    if (selected.includes(option)) {
+      const selectedWithoutOption = selected.filter((item) => item !== option);
+      setSelected(selectedWithoutOption);
+      return;
+    }
+
+    const newSelected = [...selected, option];
+    setSelected(newSelected);
     setOpen(false);
   };
 
   return (
     <div className="dropdown" ref={dropdownRef}>
       <div className="dropdown-select" onClick={toggleDropdown}>
-        {selected}
-        <ChevronDown size={16} />
+        {selected.length > 0 ? (
+          <>
+            <span className="dropdown__text">{selected.join(", ")}</span>
+            <X className="dropdown__clear-icon" onClick={clearSelection} />
+          </>
+         ) : 
+         <>
+          <span className="dropdown__text">{title}</span>
+          <ChevronDown />
+         </>
+        }
       </div>
 
       {open && (
         <ul className="dropdown-menu">
-          <li key={title} onClick={() => handleSelect(title)}>
-            {title}
-          </li>
           {options.map((option) => (
-            <li key={option.id} onClick={() => handleSelect(option.name)}>
+            <li
+              key={option.id}
+              onClick={() => handleSelect(option.name)}
+              className={selected.includes(option.name) ? "dropdown__items-selected" : ""}>
               {option.name}
             </li>
           ))}
