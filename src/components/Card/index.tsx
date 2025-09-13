@@ -6,14 +6,15 @@ import './styles.scss';
 
 interface CardProps {
   post: Post;
+  onClick?: () => void
 }
 
-export function Card({ post }: CardProps) {
+export function Card({ post, onClick }: CardProps) {
   const { author, title, content, categories, createdAt, thumbnail_url } = post;
   const formattedDate = useFormattedDate(createdAt);
 
   return (
-    <div className="article-card">
+    <div className="article-card" onClick={onClick}>
       <img src={thumbnail_url} alt="Article image" />
       <div className='content-card'>
         <div className='info-article'>

@@ -1,15 +1,19 @@
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { ArrowLeft } from "lucide-react";
 
 import "./styles.scss";
 
-interface SecondaryButtonProps {
+interface SecondaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-export function SecondaryButton({ children }: SecondaryButtonProps) {
+export function SecondaryButton({ children, ...props }: SecondaryButtonProps) {
   return (
-    <button className="secondary-button">
+    <button
+      type="button"
+      className="secondary-button"
+      {...props}
+    >
       <ArrowLeft className="secondary-btn-arrow-left" />
       {children}
     </button>

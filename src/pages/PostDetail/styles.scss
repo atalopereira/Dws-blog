@@ -1,7 +1,47 @@
-.blog-post-detail {
+@use '../../styles/typography.scss' as *;
+
+.post-detail {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   margin: 16px;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  &__wrapper-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  &__wrapper-post-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  &__article-text {
+    color: var(--neutral-darkest);
+    line-height: $line-height-relaxed;
+    white-space: pre-line;
+  }
 }

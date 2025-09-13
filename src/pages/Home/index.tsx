@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { SortButton } from '../../components/Buttons/SortButton';
 import { Card } from '../../components/Card';
 import { Dropdown } from '../../components/Dropdown';
@@ -15,6 +16,7 @@ import { useFilteredPosts } from '../../hooks/useFilteredPosts';
 import './styles.scss';
 
 export function Home() {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const posts = useSelector(selectPosts);
   const authors = useSelector(selectAuthors);
@@ -43,6 +45,10 @@ export function Home() {
   function handleFilterList(filterItems: FilterListItems) {
     dispatch(setCategoriesFilter(filterItems.categories));
     dispatch(setAuthorsFilter(filterItems.authors));
+  }
+
+  function handleCard(postId: string) {
+    navigate(`post/${postId}`);
   }
 
   return (
@@ -81,7 +87,11 @@ export function Home() {
         </div>
         <div className='blog-home__cards'>
           {filteredPosts.map(post => (
-            <Card key={post.id} post={post} />
+            <Card
+              key={post.id}
+              post={post}
+              onClick={() => handleCard(post.id)}
+            />
           ))}
         </div>
       </div>
