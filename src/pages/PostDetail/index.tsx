@@ -50,43 +50,45 @@ export function PostDetail() {
         <SecondaryButton onClick={handleBackButton}>Back</SecondaryButton>
       </div>
 
-      <div className='post-detail__wrapper-title'>
-        <h2>{post.title}</h2>
-      </div>
-
-      <div className='post-detail__wrapper-post-info'>
-        <PostInfo
-          profilePicture={post.author.profilePicture}
-          name={post.author.name}
-          createdAt={post.author.createdAt}
-        />
-      </div>
-
       <div className='post-detail__content'>
-        <img
-          src={post.thumbnail_url}
-          alt='Article image'
-          className='post-detail__image'
-        />
-        <article className='post-detail__article-text'>
-          {post.content}
-        </article>
-      </div>
+        <div className='post-detail__wrapper-title'>
+          <h1>{post.title}</h1>
+        </div>
 
-      <hr className='post-detail__horizontal-line' />
-
-      <div className='post-detail__wrapper-last-articles-title'>
-        <h2>Last articles</h2>
-      </div>
-
-      <div className='post-detail__wrapper-cards'>
-        {latestPosts.map(post => (
-          <Card
-            key={post.id}
-            post={post}
-            onClick={() => handleLastPost(post.id)}
+        <div className='post-detail__wrapper-post-info'>
+          <PostInfo
+            profilePicture={post.author.profilePicture}
+            name={post.author.name}
+            createdAt={post.author.createdAt}
           />
-        ))}
+        </div>
+
+        <div className='post-detail__content-article'>
+          <img
+            src={post.thumbnail_url}
+            alt='Article image'
+            className='post-detail__image'
+          />
+          <article className='post-detail__article-text'>
+            {post.content}
+          </article>
+        </div>
+
+        <hr className='post-detail__horizontal-line' />
+
+        <div className='post-detail__wrapper-last-articles-title'>
+          <h2>Last articles</h2>
+        </div>
+
+        <div className='post-detail__wrapper-cards'>
+          {latestPosts.map(post => (
+            <Card
+              key={post.id}
+              post={post}
+              onClick={() => handleLastPost(post.id)}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
