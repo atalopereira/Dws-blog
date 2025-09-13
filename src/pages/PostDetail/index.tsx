@@ -3,7 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SecondaryButton } from '../../components/Buttons/SecondaryButton';
 import { PostInfo } from '../../components/PostInfo';
-import { addSelectedPost, clearSelectedPost, fetchPostById, selectPosts, selectSelectedPost } from '../../store/postsSlice';
+import { Card } from '../../components/Card';
+import { Loading } from '../../components/Loading';
+import { useLatestPosts } from '../../hooks/useLatestPosts';
+import { addSelectedPost, clearSelectedPost, fetchPostById, fetchPosts, selectPosts, selectSelectedPost } from '../../store/postsSlice';
 import type { AppDispatch } from '../../store/store';
 
 import './styles.scss';
@@ -14,7 +17,7 @@ export function PostDetail() {
   const { id } = useParams();
   const posts = useSelector(selectPosts);
   const post = useSelector(selectSelectedPost);
-  console.log(id, post, posts)
+  const latestPosts = useLatestPosts(posts, 3);
 
   useEffect(() => {
     if (posts && posts.length > 0) {
@@ -24,16 +27,21 @@ export function PostDetail() {
     }
     if (!post && id) {
       dispatch(fetchPostById(id))
+      dispatch(fetchPosts())
     }
-  }, [])
+  }, [id])
 
   function handleBackButton() {
     dispatch(clearSelectedPost())
     navigate('/');
   }
 
+  function handleLastPost(postId: string) {
+    navigate(`/post/${postId}`)
+  }
+
   if (!post) {
-    return <section>Loading...</section>
+    return <Loading />
   }
 
   return (
@@ -63,6 +71,22 @@ export function PostDetail() {
         <article className='post-detail__article-text'>
           {post.content}
         </article>
+      </div>
+
+      <hr className='post-detail__horizontal-line' />
+
+      <div className='post-detail__wrapper-last-articles-title'>
+        <h2>Last articles</h2>
+      </div>
+
+      <div className='post-detail__wrapper-cards'>
+        {latestPosts.map(post => (
+          <Card
+            key={post.id}
+            post={post}
+            onClick={() => handleLastPost(post.id)}
+          />
+        ))}
       </div>
     </section>
   )
