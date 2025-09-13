@@ -26,7 +26,12 @@ export interface Author {
   updatedAt: string;
 }
 
-export interface DropdownItem {
+export interface OptionItem {
   id: string;
   name: string;
+}
+
+export interface FilterListItems {
+  categories: OptionItem[],
+  authors: OptionItem[]
 }

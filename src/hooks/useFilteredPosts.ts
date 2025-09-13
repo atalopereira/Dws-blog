@@ -1,8 +1,8 @@
-import type { DropdownItem, Post } from "../types";
+import type { OptionItem, Post } from "../types";
 
 interface Filters {
-  authors: DropdownItem[];
-  categories: DropdownItem[];
+  authors: OptionItem[];
+  categories: OptionItem[];
   sortBy: 'newest' | 'oldest';
 }
 

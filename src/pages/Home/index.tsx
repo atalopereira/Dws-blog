@@ -7,7 +7,7 @@ import { FilterList } from '../../components/FilterList';
 import { fetchPosts, selectPosts } from '../../store/postsSlice';
 import { fetchAuthors, selectAuthors } from '../../store/authorsSlice';
 import { fetchCategories, selectCategories } from '../../store/categoriesSlice';
-import type { DropdownItem } from '../../types';
+import type { OptionItem, FilterListItems } from '../../types';
 import type { AppDispatch } from '../../store/store';
 import { selectFilters, setAuthorsFilter, setCategoriesFilter } from '../../store/filtersSlice';
 import { useFilteredPosts } from '../../hooks/useFilteredPosts';
@@ -32,15 +32,18 @@ export function Home() {
     dispatch(fetchCategories());
   }, [dispatch])
 
-  function handleCategory(selectedCategories: DropdownItem[]) {
+  function handleCategory(selectedCategories: OptionItem[]) {
     dispatch(setCategoriesFilter(selectedCategories));
   }
 
-  function handleAuthor(selectedAuthors: DropdownItem[]) {
+  function handleAuthor(selectedAuthors: OptionItem[]) {
     dispatch(setAuthorsFilter(selectedAuthors));
   }
 
-  console.log(posts);
+  function handleFilterList(filterItems: FilterListItems) {
+    dispatch(setCategoriesFilter(filterItems.categories));
+    dispatch(setAuthorsFilter(filterItems.authors));
+  }
 
   return (
     <section className='blog-home'>
@@ -68,7 +71,13 @@ export function Home() {
 
       <div className='blog-home__content'>
         <div className='blog-home__wrapper-filter-list'>
-          <FilterList authors={authors} categories={categories} />
+          <FilterList
+            authors={authors}
+            categories={categoryOptions}
+            authorsSelected={filters.authors}
+            categoriesSelected={filters.categories}
+            onChange={handleFilterList}
+          />
         </div>
         <div className='blog-home__cards'>
           {filteredPosts.map(post => (

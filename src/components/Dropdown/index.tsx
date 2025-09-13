@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, X } from "lucide-react";
-import type { DropdownItem } from "../../types";
+import type { OptionItem } from "../../types";
 
 import './styles.scss';
 
 interface DropdownProps {
   title: string;
-  options: DropdownItem[];
-  selectedOptions: DropdownItem[];
-  onChange: (selected: DropdownItem[]) => void;
+  options: OptionItem[];
+  selectedOptions: OptionItem[];
+  onChange: (selected: OptionItem[]) => void;
 }
 
 export function Dropdown({ options, title, selectedOptions, onChange }: DropdownProps) {
@@ -31,7 +31,7 @@ export function Dropdown({ options, title, selectedOptions, onChange }: Dropdown
     onChange([]);
   }
 
-  function handleSelect(option: DropdownItem) {
+  function handleSelect(option: OptionItem) {
     const alreadySelected = selectedOptions.some(item => item.id === option.id);
     if (alreadySelected) {
       const selectedWithoutOption = selectedOptions.filter((item) => item.id !== option.id);

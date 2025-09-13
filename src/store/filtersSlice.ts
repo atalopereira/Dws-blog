@@ -1,12 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
-import type { DropdownItem } from "../types";
+import type { OptionItem } from "../types";
 
 type SortBy = "newest" | "oldest";
 
 interface FiltersState {
-  authors: DropdownItem[];
-  categories: DropdownItem[];
+  authors: OptionItem[];
+  categories: OptionItem[];
   sortBy: SortBy;
 }
 
@@ -20,10 +20,10 @@ const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    setAuthorsFilter(state, action: PayloadAction<DropdownItem[]>) {
+    setAuthorsFilter(state, action: PayloadAction<OptionItem[]>) {
       state.authors = action.payload;
     },
-    setCategoriesFilter(state, action: PayloadAction<DropdownItem[]>) {
+    setCategoriesFilter(state, action: PayloadAction<OptionItem[]>) {
       state.categories = action.payload;
     },
     setSortBy(state, action: PayloadAction<SortBy>) {

@@ -1,18 +1,17 @@
-import { useState } from 'react';
-
 import './styles.scss';
 
 interface FilterItemProps {
   content: string;
+  isSelected: boolean;
+  onClick: () => void;
 }
 
-export function FilterItem({ content }: FilterItemProps) {
-  const [isSelected, setIsSelected] = useState(false);
-
+export function FilterItem({ content, isSelected, onClick }: FilterItemProps) {
   return (
     <button
+      type='button'
       className={`filter-item ${isSelected ? 'selected' : ''}`}
-      onClick={() => setIsSelected(!isSelected)}
+      onClick={onClick}
     >
       {content}
     </button>
