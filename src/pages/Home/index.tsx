@@ -5,6 +5,7 @@ import { SortButton } from '../../components/Buttons/SortButton';
 import { Card } from '../../components/Card';
 import { Dropdown } from '../../components/Dropdown';
 import { FilterList } from '../../components/FilterList';
+import { Loading } from '../../components/Loading';
 import { fetchPosts, selectPosts } from '../../store/postsSlice';
 import { fetchAuthors, selectAuthors } from '../../store/authorsSlice';
 import { fetchCategories, selectCategories } from '../../store/categoriesSlice';
@@ -29,9 +30,11 @@ export function Home() {
   const filteredPosts = useFilteredPosts(posts, filters);
 
   useEffect(() => {
-    dispatch(fetchPosts());
-    dispatch(fetchAuthors());
-    dispatch(fetchCategories());
+    if (!posts || posts.length === 0) {
+      dispatch(fetchPosts());
+      dispatch(fetchAuthors());
+      dispatch(fetchCategories());
+    }
   }, [dispatch])
 
   function handleCategory(selectedCategories: OptionItem[]) {
@@ -50,6 +53,8 @@ export function Home() {
   function handleCard(postId: string) {
     navigate(`post/${postId}`);
   }
+
+  if (!posts || posts.length === 0) return <Loading />
 
   return (
     <section className='blog-home'>

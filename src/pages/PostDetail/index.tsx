@@ -41,7 +41,7 @@ export function PostDetail() {
   }
 
   if (!post) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
