@@ -10,6 +10,8 @@ Dws-blog is a blog application built with React that consumes an external API to
 - **TypeScript** for type safety
 - **SCSS** for styling
 - **Vite** as the build tool and development server
+- **Jest** for unit testing
+- **React Testing Library** for component testing
 
 ## How to install and run
 
