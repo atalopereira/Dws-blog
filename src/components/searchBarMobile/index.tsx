@@ -1,4 +1,4 @@
-import { Search, X, ArrowLeft } from 'react-feather';
+import { Search, X, ArrowLeft } from 'lucide-react';
 
 import './styles.scss';
 
