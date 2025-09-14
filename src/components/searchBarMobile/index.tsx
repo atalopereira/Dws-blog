@@ -1,37 +1,31 @@
 import { Search, X, ArrowLeft } from 'react-feather';
 
 import './styles.scss';
-import { useState } from 'react';
 
 interface SearchBarProps {
+  value: string,
   isSearching: boolean;
-  changeSearch: () => void;
+  changeOpen: () => void;
+  onChange: (value: string) => void;
 }
 
-export function SearchBarMobile({ isSearching, changeSearch }: SearchBarProps) {
-  const [searchValue, setSearchValue] = useState('')
-
-  function handleExitSearch() {
-    setSearchValue('');
-    changeSearch();
-  }
-
+export function SearchBarMobile({ value, isSearching, changeOpen, onChange }: SearchBarProps) {
   return (
     <div className='search-bar-mobile'>
       {isSearching ? (
         <>
           <button className='arrow-button'>
-            <ArrowLeft className='x-icon' onClick={handleExitSearch} />
+            <ArrowLeft className='x-icon' onClick={changeOpen} />
           </button>
           <input
             type="text"
             placeholder="Search..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
           />
           <button
             className='close-button'
-            onClick={() => setSearchValue('')}
+            onClick={() => onChange('')}
           >
             <X className='x-icon' />
           </button>
@@ -39,7 +33,7 @@ export function SearchBarMobile({ isSearching, changeSearch }: SearchBarProps) {
       ) : (
         <button
           className='search-button'
-          onClick={changeSearch}
+          onClick={changeOpen}
         >
           <Search className='search-icon-mobile' />
         </button>

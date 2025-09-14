@@ -1,14 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { SearchBar } from '../searchBar';
 import { SearchBarMobile } from '../searchBarMobile';
+import { useDebounce } from '../../hooks/useDebounce';
+import { setSearch } from '../../store/filtersSlice';
+import type { AppDispatch } from '../../store/store';
 
 import './styles.scss';
 
 export function Header() {
+  const dispatch = useDispatch<AppDispatch>();
   const [searching, setSearching] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const debouncedSearchValue = useDebounce(searchValue, 500);
 
-  function handleSearching() {
+  useEffect(() => {
+    dispatch(setSearch(debouncedSearchValue))
+  }, [debouncedSearchValue])
+
+  function handleChangeOpenSearch() {
     setSearching(!searching);
+    setSearchValue('');
+  }
+
+  function handleSearch(value: string) {
+    setSearchValue(value);
   }
 
   return (
@@ -21,9 +37,14 @@ export function Header() {
       )}
       <SearchBarMobile
         isSearching={searching}
-        changeSearch={handleSearching}
+        changeOpen={handleChangeOpenSearch}
+        value={searchValue}
+        onChange={handleSearch}
       />
-      <SearchBar />
+      <SearchBar
+        value={searchValue}
+        onChange={handleSearch}
+      />
     </header>
   )
 }

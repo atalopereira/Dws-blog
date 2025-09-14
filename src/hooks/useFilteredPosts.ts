@@ -1,12 +1,6 @@
-import type { OptionItem, Post } from "../types";
+import type { FiltersState, Post } from "../types";
 
-interface Filters {
-  authors: OptionItem[];
-  categories: OptionItem[];
-  sortBy: 'newest' | 'oldest';
-}
-
-export function useFilteredPosts(posts: Post[], filters: Filters) {
+export function useFilteredPosts(posts: Post[], filters: FiltersState) {
   let filtered = posts;
 
   if (filters.authors && filters.authors.length > 0) {
@@ -23,6 +17,11 @@ export function useFilteredPosts(posts: Post[], filters: Filters) {
     filtered = filtered.filter(post => 
       post.categories.some(cat => selectedCategoryIds.includes(cat.id))
     );
+  }
+
+  if (filters.search) {
+    const textSearch = filters.search.toLowerCase().trim();
+    filtered = filtered.filter(post => post.title.toLowerCase().includes(textSearch))
   }
 
   filtered = [...filtered].sort((a, b) => {

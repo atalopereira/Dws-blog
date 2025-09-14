@@ -1,19 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
-import type { OptionItem } from "../types";
-
-type SortBy = "newest" | "oldest";
-
-interface FiltersState {
-  authors: OptionItem[];
-  categories: OptionItem[];
-  sortBy: SortBy;
-}
+import type { FiltersState, OptionItem, SortBy } from "../types";
 
 const initialState: FiltersState = {
   authors: [],
   categories: [],
   sortBy: "newest",
+  search: '',
 }
 
 const filtersSlice = createSlice({
@@ -28,11 +21,14 @@ const filtersSlice = createSlice({
     },
     setSortBy(state, action: PayloadAction<SortBy>) {
       state.sortBy = action.payload;
+    },
+    setSearch(state, action: PayloadAction<string>) {
+      state.search = action.payload;
     }
   }
 });
 
-export const { setAuthorsFilter, setCategoriesFilter, setSortBy } = filtersSlice.actions;
+export const { setAuthorsFilter, setCategoriesFilter, setSortBy, setSearch } = filtersSlice.actions;
 
 export const selectFilters = (state: RootState) => state.filters;
 export default filtersSlice.reducer;

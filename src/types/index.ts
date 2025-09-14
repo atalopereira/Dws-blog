@@ -35,3 +35,12 @@ export interface FilterListItems {
   categories: OptionItem[],
   authors: OptionItem[]
 }
+
+export type SortBy = "newest" | "oldest";
+
+export interface FiltersState {
+  authors: OptionItem[];
+  categories: OptionItem[];
+  sortBy: SortBy;
+  search: string;
+}
